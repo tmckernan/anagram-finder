@@ -1,34 +1,33 @@
-Infrastructure Operations Pre-interview test
+The task
 =============
 
+You need to put together a simple web application that can produce anagrams of words from a wordlit.
 
-Provision a new application server and deploy the following application
--------
-A development team wants you to deploy this simple web app. 
-- come up with a way to deploy this app and write configuration-as-code to deploy it
-- ensure that the instance is locked down and secure 
-- suggest ways to do ongoing deployments on this application
+You can find a copy of our wordlist at http://static.abscond.org/wordlist.txt
+Non-alphanumeric characters should be considered as part of the anagram (e.g. "he's" is not an anagram of "she")
+The application should be able to respond to a request made every second
+Assume that the application will be hosted on heroku
+Details
+The application should be able to receive an HTTP GET request with the requested word as the path. It should return the results as JSON. See the example below:
 
-
-Expected output
--------------
-- A method of being able to do repeatable deployments of the simple web application
-- Within a readme or similar, articulate the reasons for the decisions you made 
-- Share this output with the hiring manager - via a link to a git project, text file, or artifact  
-
- 
+GET /crepitus
+{"crepitus":["cuprites","pictures","piecrust"]}
 
 
-To get this application working locally
+GET /crepitus,paste,kinship,enlist,boaster,fresher,sinks,knits,sort
+{"crepitus":["cuprites","pictures","piecrust"],"paste":["pates","peats","septa","spate","tapes","tepas"],"kinship":["pinkish"],"enlist":["elints","inlets","listen","silent","tinsel"],"boaster":["boaters","borates","rebatos","sorbate"],"fresher":["refresh"],"sinks":["skins"],"knits":["skint","stink","tinks"],"sort":["orts","rots","stor","tors"]}
+
+
+GET /sdfwehrtgegfg
+{"sdfwehrtgegfg":[]}
+
+Get Started Locally
 =============
 
-    git clone git://github.com/tnh/simple-sinatra-app.git
-    shell $ bundle install
-    shell $ bundle exec rackup
+First, check the Redis connection credentials in the relevant .env files.
 
-Mod passenger:
-http://www.modrails.com/documentation/Users%20guide%20Apache.html
-
-Unicorn nginx:
-http://sirupsen.com/setting-up-unicorn-with-nginx/
+Bundle the gems: bundle install
+Run the tests: bundle exec rspec
+Load the dictionary: bundle exec rake dictionary:load (this will take several minutes)
+Start the server: bundle exec rackup
 
